@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+
+    <script th:src="@{/main.js}"></script>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+
+    <head>
+<body ng-app="EmployeeManagement" ng-controller="EmployeeController">
+<h3>
+    Document service
+</h3>
+<form ng-submit="submitEmployee()">
+    <table border="0">
+        <tr>
+            <td>№ документа</td>
+            <td>{{employeeForm.docId}}</td>
+        </tr>
+        <tr>
+            <td>Описание</td>
+            <td><input type="text" ng-model="employeeForm.docNote" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Submit" class="blue-button" />
+            </td>
+        </tr>
+    </table>
+    <table border="1">
+        <tr>
+            <th>№ строки</th>
+            <th>Имя</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+        </tr>
+        <!-- $scope.employees -->
+        <tr ng-repeat="item in employeeForm.items">
+            <td> {{ item.id }}</td>
+            <td> {{ item.name }}</td>
+            <td>
+                <a ng-click="editItem(item)" class="edit-button">Изменить</a>
+            </td>
+            <td>
+                <a ng-click="deleteItem(item)" class="delete-button">Удалить</a>
+            </td>
+        </tr>
+    </table>
+    <a class="create-button"
+       ng-click="createItem()">Create Item</a>
+</form>
+<br/>
+<a class="create-button"
+   ng-click="createEmployee()">Create Employee</a>
+<table border="1">
+    <tr>
+        <th>№ документа</th>
+        <th>Дата создания</th>
+        <th>Описание</th>
+        <th>Изменить</th>
+        <th>Удалить</th>
+    </tr>
+    <!-- $scope.employees -->
+    <tr ng-repeat="employee in employees">
+        <td> {{ employee.id }}</td>
+        <td> {{ employee.created  | date:'dd-MM-yy HH:mm'}}</td>
+        <td> {{ employee.note }}</td>
+        <td>
+            <a ng-click="editEmployee(employee)" class="edit-button">Изменить</a>
+        </td>
+        <td>
+            <a ng-click="deleteEmployee(employee)" class="delete-button">Удалить</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
